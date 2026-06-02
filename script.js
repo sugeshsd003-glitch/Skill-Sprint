@@ -15,6 +15,236 @@ if(settingsPanel.style.display==="block"){
 settingsPanel.style.display="none";
 
 }else{
+// ========================
+// TODAY I LEARNED
+// ========================
+
+const learnInput =
+document.getElementById(
+"learnInput"
+);
+
+const saveLearnBtn =
+document.getElementById(
+"saveLearnBtn"
+);
+
+const learnTimeline =
+document.getElementById(
+"learnTimeline"
+);
+
+function saveLearnEntry(){
+
+const text =
+learnInput.value.trim();
+
+if(text==="") return;
+
+const entry = {
+
+date:
+new Date()
+.toLocaleDateString(),
+
+time:
+new Date()
+.toLocaleTimeString(),
+
+text:text
+
+};
+
+learnEntries.push(
+entry
+);
+
+localStorage.setItem(
+"learnEntries",
+JSON.stringify(
+learnEntries
+)
+);
+
+learnInput.value="";
+
+renderLearnTimeline();
+
+updateLearningStats();
+
+showToast(
+"Learning Saved"
+);
+
+}
+
+saveLearnBtn.addEventListener(
+"click",
+saveLearnEntry
+);
+
+// ========================
+// TIMELINE
+// ========================
+
+function renderLearnTimeline(){
+
+learnTimeline.innerHTML="";
+
+const reversed =
+
+[...learnEntries]
+.reverse();
+
+reversed.forEach(item=>{
+
+const div =
+document.createElement(
+"div"
+);
+
+div.className =
+"timeline-item";
+
+div.innerHTML = `
+
+<div class="timeline-date">
+
+${item.date}
+•
+${item.time}
+
+</div>
+
+<div>
+
+${item.text}
+
+</div>
+
+`;
+
+learnTimeline.appendChild(
+div
+);
+
+});
+
+}
+
+// ========================
+// LEARNING STATS
+// ========================
+
+function updateLearningStats(){
+
+learnCount.textContent =
+learnEntries.length;
+
+if(
+learnEntries.length >= 1
+){
+
+unlockAchievement(
+"First Learning Entry"
+);
+
+}
+
+if(
+learnEntries.length >= 5
+){
+
+unlockAchievement(
+"Knowledge Builder"
+);
+
+}
+
+if(
+learnEntries.length >= 25
+){
+
+unlockAchievement(
+"Lifelong Learner"
+);
+
+}
+
+if(
+learnEntries.length >= 100
+){
+
+unlockAchievement(
+"Scholar"
+);
+
+}
+
+}
+
+// ========================
+// DASHBOARD QUOTE
+// ========================
+
+const quotes = [
+
+"Discipline beats motivation.",
+
+"Small progress is still progress.",
+
+"Focus creates excellence.",
+
+"Consistency builds mastery.",
+
+"Growth begins outside comfort zones.",
+
+"Every day is a chance to improve.",
+
+"Deep work creates remarkable results."
+
+];
+
+function setDailyQuote(){
+
+const quoteIndex =
+
+new Date().getDate()
+%
+quotes.length;
+
+const quote =
+
+quotes[quoteIndex];
+
+const hero =
+document.querySelector(
+".hero"
+);
+
+hero.innerHTML += `
+
+<div
+class="daily-quote"
+>
+
+"${quote}"
+
+</div>
+
+`;
+
+}
+
+setDailyQuote();
+
+// ========================
+// LOAD
+// ========================
+
+renderLearnTimeline();
+
+updateLearningStats();
 
 settingsPanel.style.display="block";
 
