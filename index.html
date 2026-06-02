@@ -1,46 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill Sprint</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SkillSprint</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <header>
-            <h1>Skill Sprint</h1>
-            <p>Master your skills in record time</p>
-        </header>
-        
-        <main>
-            <section class="hero">
-                <h2>Welcome to Skill Sprint</h2>
-                <p>A platform to accelerate your learning journey</p>
-                <button id="startBtn" class="btn">Get Started</button>
-            </section>
-            
-            <section class="features">
-                <div class="feature">
-                    <h3>Fast Learning</h3>
-                    <p>Learn new skills quickly with structured paths</p>
-                </div>
-                <div class="feature">
-                    <h3>Track Progress</h3>
-                    <p>Monitor your progress and stay motivated</p>
-                </div>
-                <div class="feature">
-                    <h3>Community</h3>
-                    <p>Connect with learners around the world</p>
-                </div>
-            </section>
-        </main>
-        
-        <footer>
-            <p>&copy; 2026 Skill Sprint. All rights reserved.</p>
-        </footer>
+
+<!-- Settings Menu -->
+
+<div class="menu-btn" id="menuBtn">
+    ⋮
+</div>
+
+<div class="settings-panel" id="settingsPanel">
+
+    <h3>About</h3>
+
+    <p>
+        SkillSprint helps learners build
+        discipline, focus and growth through
+        daily progress.
+    </p>
+
+    <hr>
+
+    <p>Version 1.0 Premium</p>
+
+</div>
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <div class="logo-circle"></div>
+
+        <div>
+            <h2>SkillSprint</h2>
+            <span>Learn • Focus • Grow</span>
+        </div>
+
     </div>
-    
-    <script src="script.js"></script>
+
+    <nav>
+
+        <a href="#dashboard">
+            ◈ Dashboard
+        </a>
+
+        <a href="#goals">
+            ◉ Goals
+        </a>
+
+        <a href="#focus">
+            ◌ Focus
+        </a>
+
+        <a href="#learn">
+            ◆ Learning
+        </a>
+
+        <a href="#achievements">
+            ⬢ Achievements
+        </a>
+
+    </nav>
+
+</aside>
+
+<!-- Main Content -->
+
+<main class="main">
+
+    <!-- Hero -->
+
+    <section class="hero" id="dashboard">
+
+        <div>
+
+            <h1>
+                Welcome Back
+            </h1>
+
+            <p>
+                Small daily improvements create
+                remarkable long-term results.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Statistics -->
+
+    <section class="stats-grid">
+
+        <div class="stat-card">
+
+            <h2 id="goalCount">
+                0
+            </h2>
+
+            <span>
+                Active Goals
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="sessionCount">
+                0
+            </h2>
+
+            <span>
+                Focus Sessions
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="learnCount">
+                0
+            </h2>
+
+            <span>
+                Learning Entries
+            </span>
+
+        </div>
+
+        <div class="stat-card">
+
+            <h2 id="streakCount">
+                1
+            </h2>
+
+            <span>
+                Day Streak
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- Main Grid -->
+
+    <section class="dashboard-grid">
+
+        <!-- Goals -->
+
+        <div class="card" id="goals">
+
+            <div class="card-header">
+
+                <h3>
+                    Goal Tracker
+                </h3>
+
+            </div>
+
+            <input
+                type="text"
+                id="goalInput"
+                placeholder="Add a new goal..."
+            >
+
+            <button id="addGoalBtn">
+
+                Add Goal
+
+            </button>
+
+            <div id="goalList">
+
+            </div>
+
+        </div>
+
+        <!-- Pomodoro -->
+
+        <div class="card" id="focus">
+
+            <div class="card-header">
+
+                <h3>
+                    Focus Session
+                </h3>
+
+            </div>
+
+            <div class="timer-container">
+
+                <div class="timer-ring">
+
+                    <div
+                        class="timer-text"
+                        id="timerDisplay"
+                    >
+                        25:00
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="timer-controls">
+
+                <button id="startBtn">
+                    Start
+                </button>
+
+                <button id="pauseBtn">
+                    Pause
+                </button>
+
+                <button id="resetBtn">
+                    Reset
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Learning -->
+
+        <div class="card" id="learn">
+
+            <div class="card-header">
+
+                <h3>
+                    Today I Learned
+                </h3>
+
+            </div>
+
+            <textarea
+                id="learnInput"
+                placeholder="What did you learn today?"
+            ></textarea>
+
+            <button id="saveLearnBtn">
+
+                Save Entry
+
+            </button>
+
+            <div id="learnTimeline">
+
+            </div>
+
+        </div>
+
+        <!-- Achievements -->
+
+        <div class="card" id="achievements">
+
+            <div class="card-header">
+
+                <h3>
+                    Achievements
+                </h3>
+
+            </div>
+
+            <div id="achievementList">
+
+                <div class="achievement">
+                    🎯 First Goal
+                </div>
+
+                <div class="achievement">
+                    ⏳ Focus Master
+                </div>
+
+                <div class="achievement">
+                    📖 Knowledge Builder
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+
 </body>
 </html>
