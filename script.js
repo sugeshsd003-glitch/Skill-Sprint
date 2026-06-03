@@ -307,6 +307,37 @@ goalList.innerHTML="";
 
 goals.forEach((goal,index)=>{
 
+const today =
+new Date();
+
+const target =
+new Date(goal.targetDate);
+
+const daysLeft =
+Math.ceil(
+(target - today)
+/
+(1000*60*60*24)
+);
+
+let countdownText = "";
+
+if(goal.status==="pending"){
+
+if(daysLeft > 0){
+
+countdownText =
+`${daysLeft} days remaining`;
+
+}else{
+
+countdownText =
+"Goal deadline reached";
+
+}
+
+}
+
 const div =
 document.createElement("div");
 
@@ -315,21 +346,40 @@ div.className =
 
 div.innerHTML = `
 
-<span>${goal.text}</span>
+<div>
+
+<b>${goal.text}</b>
+
+<br>
+
+<small>
+Target:
+${goal.targetDate}
+</small>
+
+<br>
+
+<small>
+${countdownText}
+</small>
+
+</div>
 
 <div>
 
-<button
-onclick="completeGoal(${index})"
->
-✓
-</button>
+${
+daysLeft <= 0 &&
+goal.status==="pending"
+?
 
-<button
-onclick="deleteGoal(${index})"
->
-✕
-</button>
+`<button onclick="askAchievement(${index})">
+Review
+</button>`
+
+:
+
+""
+}
 
 </div>
 
@@ -349,13 +399,21 @@ function addGoal(){
 const text =
 goalInput.value.trim();
 
-if(text==="") return;
+const targetDate =
+document.getElementById(
+"goalDate"
+).value;
+
+if(text === "" || !targetDate)
+return;
 
 goals.push({
 
 text:text,
 
-completed:false
+targetDate:targetDate,
+
+status:"pending"
 
 });
 
@@ -365,8 +423,11 @@ renderGoals();
 
 goalInput.value="";
 
-}
+document.getElementById(
+"goalDate"
+).value="";
 
+}
 function deleteGoal(index){
 
 goals.splice(index,1);
